@@ -1,8 +1,5 @@
-// import contactsData from '../assets/contacts.json';
 import '../index.css';
 import { useState, useEffect } from 'react';
-// import { nanoid } from 'nanoid';
-// import Work from './Work/Work';
 import SearchBar from './SearchBar/SearchBar';
 import fetchArticles from '../services/api';
 import ImageGallery from './ImageGallery/ImageGallery';
