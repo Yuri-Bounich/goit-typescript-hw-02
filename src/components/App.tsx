@@ -9,21 +9,26 @@ import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './ImageModal/ImageModal';
 import toast from 'react-hot-toast';
 
+type Image = {
+  id: number;
+  url: string;
+};
+
 const App = () => {
   // 1)створюємо стейт для зберігання картинок
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   // 6) фіксуємо стан для лоадера
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   // 10) створюємо змінну для помилок
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState<boolean>(false);
   // 18) створюємо змінну  для query із компоненту SearchBar
-  const [query, setQuery] = useState(' ');
+  const [query, setQuery] = useState<string>(' ');
   // 25) створюємо змінну для page (сторінки) з початковим значенням 1
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   // 30) створюємо стейт для визначення кількості сторінок щоб управляти кнопкою лоадмор
-  const [total_pages, setTotal_pages] = useState(0);
+  const [total_pages, setTotal_pages] = useState<number>(0);
   // 34) стейт для модалки
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   // 36) стейт для стану вибраної картинки
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -118,7 +123,7 @@ const App = () => {
   // }, []);
 
   // 19) створеня функції для зміни стану інпуту
-  const handleChangeQuery = query => {
+  const handleChangeQuery = (query: string) => {
     setQuery(query);
     // 29) при зміні запиту створюємо новий масив щоб при лоад мор фото не добавлялось в діючий масив
     setImages([]);
@@ -132,7 +137,7 @@ const App = () => {
   };
 
   // 37) функції відкриття модалки приймає пост
-  const openModal = post => {
+  const openModal = (post: string) => {
     setSelectedImage(post);
     setIsOpen(true);
   };

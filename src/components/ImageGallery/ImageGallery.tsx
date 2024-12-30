@@ -1,7 +1,23 @@
 import ImageCard from '../ImageCard/ImageCard';
 import s from './ImageGallery.module.css';
 
-const ImageGallery = ({ images, onImageClick }) => {
+type Image = {
+  id: string; // Унікальний ідентифікатор зображення
+  urls: {
+    small: string; // URL маленького зображення
+  };
+  alt_description: string | undefined; // Альтернативний опис зображення
+};
+
+type ImageGalleryProps = {
+  images: Image[];
+  onImageClick: (image: Image) => void;
+};
+
+const ImageGallery: React.FC<ImageGalleryProps> = ({
+  images,
+  onImageClick,
+}) => {
   //console.log(images);
   // фільтрація для видалення дубльованих записів. консоль видавала помилку і АРІ повертаєдубльований масив(через консольлог видно)
   const uniqueImages = images.filter(
@@ -15,7 +31,6 @@ const ImageGallery = ({ images, onImageClick }) => {
           <li key={post.id}>
             {/* Використовується унікальний ключ */}
             <ImageCard
-              className={s.imageCard}
               post={post.urls.small}
               alt={post.alt_description}
               onClick={() =>

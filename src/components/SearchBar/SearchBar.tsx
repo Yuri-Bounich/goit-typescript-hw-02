@@ -1,14 +1,22 @@
 import { Field, Form, Formik } from 'formik';
 import s from './SearchBar.module.css';
 
+type SearchBarProps = { onSubmit: () => void };
+type FormValues = {
+  query: string; // Об'єкт, що містить властивість 'query' типу string
+};
+type FormOptions = {
+  resetForm: () => void; // Метод resetForm без аргументів
+};
+
 // 21)приймаємо onSubmit
-const SearchBar = ({ onSubmit }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   // 15) створення початкового стану
   const initialValues = {
     query: '',
   };
   //16) створення функції сабміту
-  const handleSubmit = (values, options) => {
+  const handleSubmit = (values: FormValues, options: FormOptions): void => {
     //17)очищення форми
     options.resetForm();
     // console.log(values);

@@ -1,7 +1,23 @@
 import s from './ImageModal.module.css';
 import ReactModal from 'react-modal';
 
-const ImageModal = ({ isOpen, closeModal, post, alt, user, location }) => {
+type ImageModalProps = {
+  isOpen: boolean;
+  closeModal: () => void;
+  post: string; // URL зображення
+  alt: string;
+  user: string;
+  location: string; // Місце, звідки зображення
+};
+
+const ImageModal: React.FC<ImageModalProps> = ({
+  isOpen,
+  closeModal,
+  post,
+  alt,
+  user,
+  location,
+}) => {
   return (
     <ReactModal
       isOpen={isOpen}
