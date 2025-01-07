@@ -10,7 +10,7 @@ import ImageModal from './ImageModal/ImageModal';
 import toast from 'react-hot-toast';
 
 type Image = {
-  id: number;
+  id: string;
   urls: { small: string; regular: string };
   alt_description?: string;
   user: { name: string; location?: string };

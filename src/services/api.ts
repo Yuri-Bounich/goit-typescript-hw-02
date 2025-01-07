@@ -1,7 +1,21 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.unsplash.com';
-const fetchArticles = async (query, page) => {
+
+type FetchArticlesResponse = {
+  total_pages: number;
+  results: Array<{
+    id: string;
+    urls: { small: string; regular: string };
+    alt_description?: string;
+    user: { name: string; location?: string };
+  }>;
+};
+
+const fetchArticles = async (
+  query: string,
+  page: number
+): Promise<FetchArticlesResponse> => {
   const response = await axios.get(`/search/photos`, {
     params: {
       query,
