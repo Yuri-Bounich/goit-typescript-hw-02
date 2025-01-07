@@ -11,7 +11,9 @@ import toast from 'react-hot-toast';
 
 type Image = {
   id: number;
-  url: string;
+  urls: { small: string; regular: string };
+  alt_description?: string;
+  user: { name: string; location?: string };
 };
 
 const App = () => {
@@ -28,9 +30,9 @@ const App = () => {
   // 30) створюємо стейт для визначення кількості сторінок щоб управляти кнопкою лоадмор
   const [total_pages, setTotal_pages] = useState<number>(0);
   // 34) стейт для модалки
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   // 36) стейт для стану вибраної картинки
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   // юсеф для котролю сторінок
   useEffect(() => {
@@ -57,7 +59,7 @@ const App = () => {
       const getData = async () => {
         try {
           // перевірка чи наявні дані в полі пошук
-          if (!query) {
+          if (!query.trim()) {
             toast.success('enter data in the Search field', {
               style: {
                 border: '2px solid #4e75ff',
@@ -124,6 +126,10 @@ const App = () => {
 
   // 19) створеня функції для зміни стану інпуту
   const handleChangeQuery = (query: string) => {
+    if (!query.trim()) {
+      toast.error('Please enter a search term!');
+      return;
+    }
     setQuery(query);
     // 29) при зміні запиту створюємо новий масив щоб при лоад мор фото не добавлялось в діючий масив
     setImages([]);
@@ -137,8 +143,8 @@ const App = () => {
   };
 
   // 37) функції відкриття модалки приймає пост
-  const openModal = (post: string) => {
-    setSelectedImage(post);
+  const openModal = (image: Image) => {
+    setSelectedImage(image);
     setIsOpen(true);
   };
 
@@ -160,9 +166,9 @@ const App = () => {
           isOpen={isOpen}
           closeModal={closeModal}
           post={selectedImage.urls.regular}
-          alt={selectedImage.alt_description}
+          alt={selectedImage.alt_description ?? 'No description available'}
           user={selectedImage.user.name}
-          location={selectedImage.user.location}
+          location={selectedImage.user.location ?? 'Unknown location'}
         />
       )}
       <ImageGallery images={images} onImageClick={openModal} />

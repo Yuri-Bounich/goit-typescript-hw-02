@@ -3,10 +3,9 @@ import s from './ImageGallery.module.css';
 
 type Image = {
   id: string; // Унікальний ідентифікатор зображення
-  urls: {
-    small: string; // URL маленького зображення
-  };
-  alt_description: string | undefined; // Альтернативний опис зображення
+  urls: { small: string; regular: string }; // URL маленького і великого зображення
+  alt_description?: string; // Альтернативний опис зображення
+  user: { name: string; location?: string };
 };
 
 type ImageGalleryProps = {

@@ -7,7 +7,14 @@ type ImageCardProps = {
 };
 
 const ImageCard: React.FC<ImageCardProps> = ({ post, alt, onClick }) => {
-  return <img className={s.image} src={post} alt={alt} onClick={onClick} />;
+  return (
+    <img
+      className={s.image}
+      src={post}
+      alt={alt ?? 'No description available'}
+      onClick={onClick}
+    />
+  );
 };
 
 export default ImageCard;
